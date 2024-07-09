@@ -20,7 +20,7 @@ public class Main {
         clientSocket = serverSocket.accept(); // Wait for connection from client.
 
         clientSocket.getOutputStream().write(
-                "HTTP/1.1 200 OK\\r\\n\\r\\n".getBytes()
+                "HTTP/1.1 200 OK\r\n\r\n".getBytes()
         );
 
         System.out.println("accepted new connection");
