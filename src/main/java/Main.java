@@ -29,8 +29,18 @@ public class Main {
 
         OutputStream output = clientSocket.getOutputStream();
 
-        if (lines[1].equals("/")) {
+        String[] urlPath = lines[1].split("/", 0);
+
+        if (urlPath.length <= 1) {
             output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+        }
+        else if (urlPath[1].equals("echo")) {
+            String strOut = String.format(
+                        "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: %d\r\n\r\n%s",
+                        urlPath[2].length(),
+                        urlPath[2]
+                    );
+            output.write(strOut.getBytes());
         } else {
             output.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
         }
